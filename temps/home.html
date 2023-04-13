@@ -1,0 +1,116 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <h1 class="text text-3xl font-bold text-center">
+    Welcome {{request.user}}..! 
+  </h1>
+
+  <center>
+    <div class="mt-14 w-74 h-74">
+      <div id="i1" class="flex justify-around items-center">
+        <img onclick="left('i1')" class="z-1 w-10 hidden md:block h-10" src="{% static 'left.png' %}" id="my-element"/>    
+        <img class="z-1" src="{% static 'one.png' %}" id="my-element"/>    
+        <img onclick="right('i1')" class="z-1 w-10 hidden md:block h-10" src="{% static 'right.png' %}" id="my-element"/>    
+      </div>
+      <div id="i2" class="flex justify-around items-center">
+        <img onclick="left('i2')" class="z-1 w-10 hidden md:block h-10" src="{% static 'left.png' %}" id="my-element"/>    
+        <img class="z-1" src="{% static 'two.png' %}" id="my-element"/>    
+        <img onclick="right('i2')" class="z-1 w-10 hidden md:block h-10" src="{% static 'right.png' %}" id="my-element"/>    
+      </div>
+      <div id="i3" class="flex justify-around items-center">
+        <img onclick="left('i3')" class="z-1 w-10 hidden md:block h-10" src="{% static 'left.png' %}" id="my-element"/>    
+        <img class="z-1" src="{% static 'three.png' %}" id="my-element"/>    
+        <img onclick="right('i3')" class="z-1 w-10 hidden md:block h-10" src="{% static 'right.png' %}" id="my-element"/>    
+      </div>
+      <div id="i4" class="flex justify-around items-center">
+        <img onclick="left('i4')" class="z-1 w-10 hidden md:block h-10" src="{% static 'left.png' %}" id="my-element"/>    
+        <img class="z-1" src="{% static 'four.png' %}" id="my-element"/>    
+        <img onclick="right('i4')" class="z-1 w-10 hidden md:block h-10" src="{% static 'right.png' %}" id="my-element"/>    
+      </div>
+      <div id="i5" class="flex justify-around items-center">
+        <img onclick="left('i5')" class="z-1 w-10 hidden md:block h-10" src="{% static 'left.png' %}" id="my-element"/>    
+        <img class="z-1" src="{% static 'five.png' %}" id="my-element"/>    
+        <img onclick="right('i5')" class="z-1 w-10 hidden md:block h-10" src="{% static 'right.png' %}" id="my-element"/>    
+      </div>
+  </div>
+  </center>
+
+
+
+
+
+
+
+
+
+<script>
+    // get the element you want to detect swipes on
+
+
+  function left(id){
+
+    $('#'+id).slideUp(200)
+    $('.text').text('{{request.user}} you rejected that photo!')
+    $('.text').css('color','red')
+  }
+
+  function right(id){
+
+    $('#'+id).slideUp(200)
+    $('.text').text('{{request.user}} you accepted that photo!')  
+    $('.text').css('color','green')
+  }
+
+
+
+
+    const swipeElement = document.getElementById("my-element");
+
+// set the starting position and swipe distance variables
+let startingX = null;
+let distanceX = null;
+
+// add touch event listeners to detect swipes
+swipeElement.addEventListener("touchstart", function(event) {
+  startingX = event.touches[0].clientX;
+});
+
+swipeElement.addEventListener("touchmove", function(event) {
+  if (startingX !== null) {
+    distanceX = startingX - event.touches[0].clientX;
+  }
+});
+
+swipeElement.addEventListener("touchend", function(event) {
+  if (distanceX > 0) {
+    left()
+  } else if (distanceX < 0) {
+    right()
+  }
+
+  startingX = null;
+  distanceX = null;
+});
+
+
+
+
+
+
+
+</script>
+
+</body>
+
+
+
+
+
+
+</html>
